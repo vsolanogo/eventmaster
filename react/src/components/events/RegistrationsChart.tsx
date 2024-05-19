@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Line, Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   CategoryScale,
   LinearScale,
@@ -39,7 +39,7 @@ const EventParticipantsChart: React.FC<EventParticipantsChartProps> = ({
     const fetchRegistrationData = async () => {
       try {
         const response = await axios.get(
-          `/api/participant/event/${eventId}/registrations-per-day`
+          `https://mulhollandbot.site/participant/event/${eventId}/registrations-per-day`
         );
         setRegistrationData(response.data);
       } catch (error) {

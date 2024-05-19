@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { Spin } from "antd";
-import {
-  signInUserThunk,
-  signUpUserThunk,
-} from "../../redux/activeUser/activeUserSlice";
+import { signInUserThunk } from "../../redux/activeUser/activeUserSlice";
 import {
   useActiveUserLoginStatus,
   useActiveUserError,
 } from "../../redux/selectors/selectorHooks";
 import { LoginDto } from "../../models/UserModels";
-import { Button, notification, Space } from "antd";
+import { notification } from "antd";
 import { validateEmail } from "../../helpers/validateEmail";
 import { pop } from "../howler/pop";
 import {

@@ -1,4 +1,4 @@
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import pop4 from "../../sounds/pop4.wav";
 
 export const pop = new Howl({

@@ -7,7 +7,7 @@ import {
   useActiveUserError,
 } from "../../redux/selectors/selectorHooks";
 import { RegisterDto } from "../../models/UserModels";
-import { Button, notification, Space } from "antd";
+import { notification } from "antd";
 import { validateEmail } from "../../helpers/validateEmail";
 import { pop } from "../howler/pop";
 import {

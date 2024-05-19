@@ -35,7 +35,7 @@ export const CreateEvent = () => {
   const dispatch = useAppDispatch();
   const isAdmin = useActiveUserIsAdmin();
   const userId = useActiveUser();
-  const [location, navigate] = useLocation();
+  const [, navigate] = useLocation();
   const [api, contextHolder] = notification.useNotification();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [form, setForm] = useState<CreateEventDto>(eventState);

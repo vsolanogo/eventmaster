@@ -22,7 +22,6 @@ import {
 } from "./selectors";
 import { ApiStatus } from "../../constants";
 import { ErrorMessage, User } from "../../models/UserModels";
-import { SortOrderType } from "../../helpers/types/types";
 import {
   selectAllEvents,
   selectEventsById,

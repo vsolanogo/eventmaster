@@ -20,7 +20,7 @@ export const Header = () => {
   const isAuthenticated = useIsAuthenticated();
   const [matchLogin] = useRoute("/login");
   const [matchRegister] = useRoute("/register");
-  const [location, navigate] = useLocation();
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     if ((matchLogin && isAuthenticated) || (matchRegister && isAuthenticated)) {

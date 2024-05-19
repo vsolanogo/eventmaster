@@ -5,7 +5,6 @@ import { ErrorMessage, Role, User } from "../../models/UserModels";
 import { ApiStatus } from "../../constants";
 import { selectUsersEntities } from "../users/usersSlice";
 import { EventsState } from "../events/eventsSlice";
-import { SortOrderType } from "../../helpers/types/types";
 import { ParticipantsState } from "../participants/participantsSlice";
 
 export const selectActiveUserState: Selector<

@@ -30,9 +30,9 @@ export const RegisterParticipant = () => {
   const postParticipantStatus = usePostParticipantStatus();
   const error = useParticipantsError();
   const [form, setForm] = useState<RegisterParticipantDto>(initialState);
-  const [match, params] = useRoute("/events/register/:id");
+  const [, params] = useRoute("/events/register/:id");
   const [api, contextHolder] = notification.useNotification();
-  const [location, navigate] = useLocation();
+  const [, navigate] = useLocation();
 
   const activate = () => {
     if (!validateEmail(form.email)) {

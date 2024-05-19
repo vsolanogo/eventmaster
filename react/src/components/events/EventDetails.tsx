@@ -18,7 +18,7 @@ import RegistrationsChart from "./RegistrationsChart";
 
 export const EventDetails = () => {
   const dispatch = useAppDispatch();
-  const [match, params] = useRoute("/events/:id");
+  const [, params] = useRoute("/events/:id");
   const eventId = params?.id || "";
   const event = useEventsById(eventId);
   const participants = useAllParticipants();
