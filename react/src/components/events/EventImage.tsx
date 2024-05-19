@@ -34,7 +34,7 @@ export const EventImages = memo<EventImagesProps>(({ images }) => {
                 ? image.link
                 : isLocalhost
                   ? `http://localhost:3000${image.link}`
-                  : image.link
+                  : `/api${image.link}`
             }
             className="h-full w-auto object-cover rounded shadow-lg m-auto"
           />
