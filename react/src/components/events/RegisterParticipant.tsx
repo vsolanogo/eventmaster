@@ -90,19 +90,6 @@ export const RegisterParticipant = () => {
         <h1 className={formHeadingTw}>Register for event</h1>
 
         {postParticipantStatus === "PENDING" ? <Spin /> : null}
-        <label className={formLabelTw} htmlFor="email">
-          Email
-        </label>
-
-        <input
-          className={inputTw}
-          type="text"
-          name="email"
-          value={form.email}
-          onChange={onChange}
-          placeholder="Enter your email address"
-          required
-        />
 
         <label className={formLabelTw} htmlFor="fullName">
           Full Name
@@ -117,7 +104,21 @@ export const RegisterParticipant = () => {
           placeholder="Enter your Full Name"
         />
 
-        <label className={formLabelTw}>Birth Date</label>
+        <label className={formLabelTw} htmlFor="email">
+          Email
+        </label>
+
+        <input
+          className={inputTw}
+          type="text"
+          name="email"
+          value={form.email}
+          onChange={onChange}
+          placeholder="Enter your email address"
+          required
+        />
+
+        <label className={formLabelTw}>Date of birth</label>
 
         <DatePicker
           className={`${inputTw}`}
@@ -127,7 +128,7 @@ export const RegisterParticipant = () => {
         />
 
         <label className={formLabelTw} htmlFor="role">
-          Select Role
+          Where did you hear about this event?
         </label>
         <div className="mt-2">
           <label className="inline-flex items-center">

@@ -14,6 +14,7 @@ import parse from "html-react-parser";
 import * as JsSearch from "js-search";
 import { Participant } from "../../models/UserModels";
 import debounce from "lodash/debounce";
+import RegistrationsChart from "./RegistrationsChart";
 
 export const EventDetails = () => {
   const dispatch = useAppDispatch();
@@ -110,10 +111,12 @@ export const EventDetails = () => {
         </div>
       </div>
 
+      {params?.id && <RegistrationsChart eventId={params.id} />}
+
       <div className="mt-6">
-        <h3 className="text-4xl font-extrabold text-indigo-900 mb-6 border-b-2 border-indigo-500 pb-2">
+        <h4 className="text-4xl font-extrabold text-indigo-900 mb-6 border-b-2 border-indigo-500 pb-2">
           Participants
-        </h3>
+        </h4>
         {participants.length === 0 ? (
           <p className="text-lg text-gray-600">
             No participants currently registered for this event. Be the first
@@ -136,29 +139,17 @@ export const EventDetails = () => {
                 Sorry, no participants match your search.
               </p>
             )}
-            <ul className="space-y-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {foundParticipants.map((participant) => (
                 <li
                   key={participant.id}
                   className="p-4 bg-gray-100 rounded-lg shadow"
                 >
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-                    <div className="mb-2 md:mb-0">
-                      <h4 className="text-lg font-semibold">
-                        {participant.fullName}
-                      </h4>
-                      <p className="text-gray-600">{participant.email}</p>
-                    </div>
-                    <div className="text-gray-500">
-                      <p className="mb-1">
-                        <span className="font-semibold">Date of Birth: </span>
-                        {new Date(participant.dateOfBirth).toLocaleDateString()}
-                      </p>
-                      <p>
-                        <span className="font-semibold">Discovered via: </span>
-                        {participant.sourceOfEventDiscovery}
-                      </p>
-                    </div>
+                  <div className="flex flex-col items-start">
+                    <h4 className="text-lg font-semibold mb-2">
+                      {participant.fullName}
+                    </h4>
+                    <p className="text-gray-600 mb-4">{participant.email}</p>
                   </div>
                 </li>
               ))}

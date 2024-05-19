@@ -17,6 +17,8 @@ import { Client } from 'undici';
 import { ImageService } from '../image/image.service';
 import { FetchedEvent } from './dto/fetched-event.dto';
 import { generateEventDescription } from './fetchedEventDescriptionGeneration';
+import { ParticipantService } from 'src/participant/participant.service';
+import { getRandomNumber } from 'src/urils/random.util';
 
 @Injectable()
 export class EventService {
@@ -30,6 +32,7 @@ export class EventService {
     private readonly eventRepository: Repository<Event>,
     @InjectRepository(Image)
     private readonly imageRepository: Repository<Image>,
+    private readonly participantService: ParticipantService,
   ) {
     this.tickermasterKey = this.configService.get<string>('TICKETMASTER_KEY');
   }
@@ -73,7 +76,17 @@ export class EventService {
     if (errors.length > 0) {
       throw new BadRequestException(errors);
     } else {
-      return this.eventRepository.save(newEvent);
+      const savedEvent = await this.eventRepository.save(newEvent);
+
+      // Add fake participants if the event is FetchedEvent
+      if ('id' in createEventDto) {
+        await this.participantService.generateFakeParticipants(
+          savedEvent,
+          getRandomNumber(50, 1000),
+        ); // Add fake participants
+      }
+
+      return savedEvent;
     }
   }
 

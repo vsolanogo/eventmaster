@@ -190,6 +190,7 @@ export const EventsList = () => {
         defaultPageSize={10}
         current={page}
         pageSize={pageSize}
+        disabled={infiniteScroll}
       />
     </>
   );

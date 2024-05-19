@@ -32,7 +32,7 @@ export const createEvent = async (event: CreateEventDto, thunkAPI) => {
   try {
     const res = await api.post<Event>("/events", event);
     thunkAPI.dispatch(eventsSlice.actions.addOne(res.data));
-    return;
+    return res.data;
   } catch (e: any) {
     return handleApiError(e, thunkAPI);
   }

@@ -11,6 +11,7 @@ import { Session } from '../session/session.entity';
 import { Participant } from '../participant/participant.entity';
 import { EventCron } from './event.cron';
 import { ImageService } from '../image/image.service';
+import { ParticipantService } from 'src/participant/participant.service';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ImageService } from '../image/image.service';
     SessionService,
     EventCron,
     ImageService,
+    ParticipantService,
   ],
 })
 export class EventModule {}

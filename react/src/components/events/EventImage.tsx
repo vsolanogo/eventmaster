@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Image } from "../../models/UserModels";
 import Slider from "react-slick";
 
@@ -6,19 +6,20 @@ type EventImagesProps = {
   images: Image[];
 };
 
-var settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,
-};
-
-export const EventImages: React.FC<EventImagesProps> = ({ images }) => {
+export const EventImages = memo<EventImagesProps>(({ images }) => {
+  console.log({ images });
   if (images.length <= 0) return null;
 
   const isLocalhost = window.location.hostname === "localhost";
+
+  var settings = {
+    dots: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    infinite: images.length > 1,
+  };
 
   return (
     <Slider {...settings}>
@@ -41,4 +42,4 @@ export const EventImages: React.FC<EventImagesProps> = ({ images }) => {
       ))}
     </Slider>
   );
-};
+});

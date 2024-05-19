@@ -7,6 +7,13 @@ import { Participant } from './participant.entity';
 export class ParticipantController {
   constructor(private readonly participantService: ParticipantService) {}
 
+  @Get('event/:eventId/registrations-per-day')
+  async getRegistrationsPerDay(
+    @Param('eventId') eventId: string,
+  ): Promise<{ date: string; count: number }[]> {
+    return await this.participantService.getRegistrationsPerDay(eventId);
+  }
+
   @Post('event/:eventId')
   async create(
     @Body() body: CreateParticipantDto,

@@ -1,5 +1,11 @@
 import { Event } from '../event/event.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Participant {
@@ -20,4 +26,7 @@ export class Participant {
 
   @ManyToOne(() => Event, (i) => i.participants)
   event: Event;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }

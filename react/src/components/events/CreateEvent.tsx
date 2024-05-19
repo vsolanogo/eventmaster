@@ -80,11 +80,14 @@ export const CreateEvent = () => {
   const activate = () => {
     const prep = {
       ...form,
-      // eventDate: form.eventDate.toISOString(),
       images: fileList.map((i) => i?.response?.id),
     };
 
-    dispatch(postEventThunk(prep));
+    dispatch(postEventThunk(prep))
+      .unwrap()
+      .then((i) => {
+        navigate(`/events/${i?.id}`);
+      });
   };
 
   const onSelectDate = (date) => {
