@@ -8,8 +8,7 @@ import {
 } from "./api.types";
 
 export const axiosParams = {
-  // baseURL: "http://localhost:3000/",
-  // baseURL: "https://mulhollandbot.site",
+  // baseURL: "https://app.mulhollandbot.site/",
   baseURL: "/api",
 };
 
