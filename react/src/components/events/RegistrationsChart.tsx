@@ -39,7 +39,7 @@ const EventParticipantsChart: React.FC<EventParticipantsChartProps> = ({
     const fetchRegistrationData = async () => {
       try {
         const response = await axios.get(
-          `https://mulhollandbot.site/participant/event/${eventId}/registrations-per-day`
+          `/api/participant/event/${eventId}/registrations-per-day`
         );
         setRegistrationData(response.data);
       } catch (error) {
