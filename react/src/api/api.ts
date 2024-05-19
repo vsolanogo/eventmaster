@@ -9,7 +9,8 @@ import {
 
 export const axiosParams = {
   // baseURL: "http://localhost:3000/",
-  baseURL: "https://mulhollandbot.site",
+  // baseURL: "https://mulhollandbot.site",
+  baseURL: "/api",
 };
 
 const axiosInstance = axios.create(axiosParams);
