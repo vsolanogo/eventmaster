@@ -1,3 +1,5 @@
+Visit hosted app at https://mulhollandbot.site/ 
+
 # Docker Setup
 
 1. Make sure you have Node.js 18.0+ and npm installed
