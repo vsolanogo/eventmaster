@@ -20,7 +20,7 @@
 
 6. Explore the app at [http://localhost:3001/](http://localhost:3001/) in your preferred web browser.
 
-7. Admin user credentials are described in the .env file: Email - `ROOT_ADMIN_EMAIL`, Password - `ROOT_ADMIN_PASSWORD`. Admin profile will be created on initial start.
+7. Admin user credentials are described in the .env file: Email - `ROOT_ADMIN_EMAIL`, Password - `ROOT_ADMIN_PASSWORD`. Admin profile will be created on initial start. Only user with admin rights can create new events manually.
 
 8. The Ticketmaster.com integration has been implemented, and the script is set to run every 6 hours.
 
