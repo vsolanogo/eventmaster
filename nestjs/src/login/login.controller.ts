@@ -29,7 +29,6 @@ export class LoginController {
 
   @Post('logout')
   async logout(@Response() res): Promise<void> {
-    console.log("LOGPUT");
     res.clearCookie(SESSION_ID);
     // TODO: remove token from db here
 

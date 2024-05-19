@@ -3,6 +3,7 @@ import { Router } from "./Router";
 import { Header } from "./common/Header";
 import { useAppDispatch } from "../store/store";
 import { getCurrentUserThunk } from "../redux/activeUser/activeUserSlice";
+import { Footer } from "./footer/Footer";
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export const App = () => {
       <div className="App mx-auto max-w-6xl text-center my-8">
         <Router />
       </div>
+      <Footer />
     </>
   );
 };

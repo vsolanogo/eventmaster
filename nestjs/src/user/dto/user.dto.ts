@@ -21,9 +21,6 @@ export class UserDto {
   session: SessionDto[];
 
   @Expose()
-  fullName: string;
-
-  @Expose()
   createdAt: Date;
 
   @Expose()

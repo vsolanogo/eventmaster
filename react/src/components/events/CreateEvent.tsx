@@ -18,7 +18,7 @@ import {
   inputTw,
 } from "../../tailwind/tailwindClassNames";
 import { useAppDispatch } from "../../store/store";
-import { eventsSlice, postEventThunk } from "../../redux/events/eventsSlice";
+import { postEventThunk } from "../../redux/events/eventsSlice";
 
 const eventState: CreateEventDto = {
   title: "",
@@ -26,7 +26,7 @@ const eventState: CreateEventDto = {
   latitude: 0.0,
   longitude: 0.0,
   images: [],
-  eventDate: new Date(),
+  eventDate: null,
 };
 
 const floats = ["latitude", "longitude"];
@@ -43,7 +43,6 @@ export const CreateEvent = () => {
   const eventsPostStatus = useEventsPostStatus();
 
   const handleImgChange = (info: { fileList: UploadFile[] }) => {
-    console.log({info});
     setFileList(info.fileList);
   };
 
@@ -81,11 +80,18 @@ export const CreateEvent = () => {
   const activate = () => {
     const prep = {
       ...form,
-      eventDate: form.eventDate.toISOString(),
+      // eventDate: form.eventDate.toISOString(),
       images: fileList.map((i) => i?.response?.id),
     };
 
     dispatch(postEventThunk(prep));
+  };
+
+  const onSelectDate = (date) => {
+    setForm((state) => ({
+      ...state,
+      eventDate: date ? date.toDate() : null,
+    }));
   };
 
   return (
@@ -157,9 +163,7 @@ export const CreateEvent = () => {
 
             <DatePicker
               className={`${inputTw}`}
-              onChange={(e) => {
-                console.log({ e });
-              }}
+              onChange={onSelectDate}
               placeholder="Event Date"
             />
 

@@ -18,7 +18,7 @@ export class Event {
   id: string;
 
   @ManyToOne(() => User, (i) => i.id)
-  organizer: User;
+  user: User;
 
   @MinLength(2, { message: 'Title is too short' })
   @MaxLength(255, { message: 'Title is too long' })
@@ -29,6 +29,9 @@ export class Event {
   @IsString()
   @MaxLength(5000, { message: 'Description is too long' })
   description: string;
+
+  @Column({ type: 'text' })
+  organizer: string;
 
   @OneToMany(() => Image, (i) => i.event)
   images: Image[];

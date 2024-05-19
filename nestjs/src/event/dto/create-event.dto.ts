@@ -8,6 +8,7 @@ import {
   MaxLength,
   IsArray,
   Max,
+  IsDateString,
 } from 'class-validator';
 
 export class CreateEventDto {
@@ -24,6 +25,7 @@ export class CreateEventDto {
   @MaxLength(5000, { message: 'Description is too long' })
   description: string;
 
+  @IsDateString() 
   eventDate: Date;
 
   @IsOptional()

@@ -19,6 +19,9 @@ export type EventsState = {
   page: number;
   totalPages: number;
   eventDateSort: SortOrderType;
+  eventSortBy: string;
+  eventSortOrder: string;
+  infiniteScroll: boolean;
 };
 
 export const eventsState: EventsState = {
@@ -30,25 +33,27 @@ export const eventsState: EventsState = {
   page: 1,
   totalPages: 0,
   eventDateSort: "ASC",
+  eventSortBy: "eventDate",
+  eventSortOrder: "ASC",
+  infiniteScroll: false,
 };
 
 const eventsAdapter = createEntityAdapter({
-  selectId: (i: Event) => i.id,
-  sortComparer: (a, b) =>
-    new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime(),
+  selectId: (event: Event) => event.id,
 });
-
 export const getEventsThunk = createAsyncThunk("events/list", getEvents);
-
 export const getEventByIdThunk = createAsyncThunk(
   "events/getById",
   getEventById
 );
-
 export const postEventThunk = createAsyncThunk("events/create", createEvent);
-
 export const setPage = createAction<number>("events/setPage");
 export const setEventsLimit = createAction<number>("events/setEventsLimit");
+export const setSortBy = createAction<string>("events/setSortBy");
+export const setSortOrder = createAction<string>("events/setSortOrder");
+export const setInfiniteScroll = createAction<boolean>(
+  "events/setInfiniteScroll"
+);
 
 export const eventsSlice = createSlice({
   name: "events",
@@ -62,6 +67,19 @@ export const eventsSlice = createSlice({
     removeOne: eventsAdapter.removeOne,
   },
   extraReducers: (builder) => {
+    builder.addCase(
+      setInfiniteScroll,
+      (state, action: PayloadAction<boolean>) => {
+        state.infiniteScroll = action.payload;
+      }
+    );
+    builder.addCase(setSortBy, (state, action: PayloadAction<string>) => {
+      state.eventSortBy = action.payload;
+    });
+    builder.addCase(setSortOrder, (state, action: PayloadAction<string>) => {
+      state.eventSortOrder = action.payload;
+    });
+
     builder.addCase(setPage, (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     });
@@ -101,7 +119,6 @@ export const eventsSlice = createSlice({
     builder.addCase(
       getEventsThunk.fulfilled,
       (state, action: PayloadAction<any>) => {
-        console.log({ action });
         state.totalCount = action.payload.totalCount;
         const numberOfPages = Math.ceil(
           action.payload.totalCount / state.limit

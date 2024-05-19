@@ -16,7 +16,7 @@ import {
   inputTw,
 } from "../../tailwind/tailwindClassNames";
 import { createParticipantThunk } from "../../redux/participants/participantsSlice";
-import { useRoute } from "wouter";
+import { useLocation, useRoute } from "wouter";
 
 const initialState: RegisterParticipantDto = {
   fullName: "",
@@ -32,6 +32,7 @@ export const RegisterParticipant = () => {
   const [form, setForm] = useState<RegisterParticipantDto>(initialState);
   const [match, params] = useRoute("/events/register/:id");
   const [api, contextHolder] = notification.useNotification();
+  const [location, navigate] = useLocation();
 
   const activate = () => {
     if (!validateEmail(form.email)) {
@@ -44,7 +45,11 @@ export const RegisterParticipant = () => {
     }
     dispatch(
       createParticipantThunk({ eventId: params?.id || "", participant: form })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        navigate(`/events/${params?.id}`);
+      });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,8 +82,6 @@ export const RegisterParticipant = () => {
       dateOfBirth: date ? date.toDate() : null,
     }));
   };
-
-  console.log(JSON.stringify(form, undefined, 2));
 
   return (
     <>

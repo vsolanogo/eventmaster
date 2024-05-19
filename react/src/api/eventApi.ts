@@ -1,13 +1,10 @@
 import api from "./api";
-import {
-  SerializableCreateEventDto,
-  Event,
-  EventList,
-} from "../models/UserModels";
+import { CreateEventDto, Event, EventList } from "../models/UserModels";
 import { handleApiError } from "./handleApiError";
 import { eventsSlice } from "../redux/events/eventsSlice";
 import {
-  selectEventsDateSort,
+  selectEventSortBy,
+  selectEventSortOrder,
   selectEventsLimit,
   selectEventsPage,
 } from "../redux/selectors/selectors";
@@ -16,9 +13,10 @@ export const getEvents = async (undefined, thunkAPI) => {
   try {
     const limit = selectEventsLimit(thunkAPI.getState());
     const page = selectEventsPage(thunkAPI.getState());
-    const eventDateSort = selectEventsDateSort(thunkAPI.getState());
+    const sortOrder = selectEventSortOrder(thunkAPI.getState());
+    const sortBy = selectEventSortBy(thunkAPI.getState());
 
-    const params = { limit, page, eventDateSort };
+    const params = { limit, page, sortBy, sortOrder };
     const urlSearchParams = new URLSearchParams(params as any);
 
     const res = await api.get<EventList>(`/events?${urlSearchParams}`);
@@ -30,10 +28,7 @@ export const getEvents = async (undefined, thunkAPI) => {
   }
 };
 
-export const createEvent = async (
-  event: SerializableCreateEventDto,
-  thunkAPI
-) => {
+export const createEvent = async (event: CreateEventDto, thunkAPI) => {
   try {
     const res = await api.post<Event>("/events", event);
     thunkAPI.dispatch(eventsSlice.actions.addOne(res.data));

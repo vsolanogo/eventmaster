@@ -18,18 +18,22 @@ var settings = {
 export const EventImages: React.FC<EventImagesProps> = ({ images }) => {
   if (images.length <= 0) return null;
 
+  const isLocalhost = window.location.hostname === "localhost";
+
   return (
     <Slider {...settings}>
       {images.map((image) => (
         <div
           key={image.id}
-          className="flex justify-center items-center h-40 p-4"
+          className="flex justify-center items-center h-60 p-4"
         >
           <img
             src={
               image.link.startsWith("https://")
                 ? image.link
-                : `http://localhost:3000${image.link}`
+                : isLocalhost
+                  ? `http://localhost:3000${image.link}`
+                  : image.link
             }
             className="h-full w-auto object-cover rounded shadow-lg m-auto"
           />

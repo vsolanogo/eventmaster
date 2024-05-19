@@ -5,6 +5,7 @@ import {
   MinLength,
   MaxLength,
   IsEmail,
+  IsDateString,
 } from 'class-validator';
 
 export class CreateParticipantDto {
@@ -19,8 +20,7 @@ export class CreateParticipantDto {
   @IsEmail()
   email: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsDateString() 
   dateOfBirth: Date;
 
   @IsString()

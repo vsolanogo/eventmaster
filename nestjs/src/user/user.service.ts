@@ -43,7 +43,6 @@ export class UserService {
     newUser.email = registerDto.email;
     const hash = await hashPassword(registerDto.password);
     newUser.password = hash;
-    newUser.fullName = registerDto.fullName;
     newUser.role = [role];
 
     const errors = await validate(newUser);
@@ -69,7 +68,6 @@ export class UserService {
 
     const adminUser = new User();
     adminUser.email = this.adminEmail;
-    adminUser.fullName = 'admin';
     adminUser.role = [role];
     const hash = await hashPassword(this.adminPassword);
     adminUser.password = hash;

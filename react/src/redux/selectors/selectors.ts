@@ -82,7 +82,6 @@ export const selectEventsError: Selector<AppStore, ErrorMessage | null> =
 export const selectParticipantsError: Selector<AppStore, ErrorMessage | null> =
   createSelector([selectParticipantsState], (state) => state?.error ?? null);
 
-
 export const selectPostParticipantStatus: Selector<AppStore, ApiStatus | null> =
   createSelector(
     [selectParticipantsState],
@@ -111,6 +110,16 @@ export const selectEventsPage: Selector<AppStore, number> = createSelector(
   (state) => state?.page ?? 1
 );
 
+export const selectEventSortBy: Selector<AppStore, string> = createSelector(
+  [selectEventsState],
+  (state) => state?.eventSortBy ?? "eventDate"
+);
+
+export const selectEventSortOrder: Selector<AppStore, string> = createSelector(
+  [selectEventsState],
+  (state) => state?.eventSortOrder ?? "ASC"
+);
+
 export const selectTotalCount: Selector<AppStore, number> = createSelector(
   [selectEventsState],
   (state) => state?.totalCount ?? 0
@@ -119,8 +128,7 @@ export const selectTotalCount: Selector<AppStore, number> = createSelector(
 export const selectEventsTotalPages: Selector<AppStore, number> =
   createSelector([selectEventsState], (state) => state?.totalPages ?? 0);
 
-export const selectEventsDateSort: Selector<AppStore, SortOrderType> =
-  createSelector([selectEventsState], (state) => state?.eventDateSort ?? "ASC");
-
-
-
+export const selectInfiniteScroll: Selector<AppStore, boolean> = createSelector(
+  [selectEventsState],
+  (state) => state?.infiniteScroll ?? false
+);

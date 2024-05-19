@@ -14,7 +14,7 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      - POSTGRES_DB=app
+      - POSTGRES_DB=events
       - POSTGRES_USER=vitalii
       - POSTGRES_PASSWORD=vitalii
     ports:

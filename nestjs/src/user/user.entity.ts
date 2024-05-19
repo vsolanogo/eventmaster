@@ -32,10 +32,6 @@ export class User {
   @IsEmail()
   email: string;
 
-  @Column({ nullable: false, length: 50 })
-  @IsString()
-  fullName: string;
-
   @CreateDateColumn()
   createdAt: Date;
 

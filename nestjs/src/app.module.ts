@@ -34,8 +34,8 @@ import { ScheduleModule } from '@nestjs/schedule';
       useFactory: (config: ConfigService) => {
         return {
           database: config.get<string>('DB_NAME'),
-          type: 'mysql',
-          //type: 'postgres',
+          // type: 'mysql',
+          type: 'postgres',
           host: config.get<string>('DB_HOST'),
           port: config.get<number>('DB_PORT'),
           username: config.get<string>('DB_USERNAME'),

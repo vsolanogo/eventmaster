@@ -34,8 +34,6 @@ export const signInUser = async (
 };
 
 export const logoutUser = async (_, thunkAPI): Promise<void> => {
-  // return api.get<User>("/logout").then((res) => res.data);
-
   try {
     await api.post<User>("/logout", undefined, {
       withCredentials: true,

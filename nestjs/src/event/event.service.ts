@@ -57,9 +57,13 @@ export class EventService {
 
     newEvent.id = 'id' in createEventDto ? createEventDto.id : uuidv4();
     newEvent.images = images;
-    newEvent.organizer = currentUser;
+    newEvent.user = currentUser;
     newEvent.title = createEventDto.title;
     newEvent.description = createEventDto.description;
+    newEvent.organizer =
+      'organizer' in createEventDto
+        ? createEventDto.organizer
+        : currentUser.email;
     newEvent.latitude = createEventDto.latitude;
     newEvent.longitude = createEventDto.longitude;
     newEvent.eventDate = new Date(createEventDto.eventDate);
@@ -75,7 +79,7 @@ export class EventService {
 
   async findAll(): Promise<Event[]> {
     return this.eventRepository.find({
-      relations: ['images', 'organizer'],
+      relations: ['images', 'user'],
       order: { eventDate: 'ASC' },
     });
   }
@@ -101,8 +105,8 @@ export class EventService {
 
     const eventsQuery = this.eventRepository
       .createQueryBuilder('event')
+      .leftJoinAndSelect('event.user', 'user')
       .leftJoinAndSelect('event.images', 'images')
-      .leftJoinAndSelect('event.organizer', 'organizer')
       .orderBy(`event.${sortOptions[sortBy]}`, order)
       .skip((page - 1) * limit)
       .take(limit);
@@ -115,7 +119,7 @@ export class EventService {
   async getEventById(id: string): Promise<Event> {
     return this.eventRepository.findOne({
       where: { id },
-      relations: ['images', 'organizer', 'participants'],
+      relations: ['images', 'user', 'participants'],
     });
   }
 
@@ -160,6 +164,7 @@ export class EventService {
         title: event.name,
         images: createdImages.map((i) => i.id),
         description: generateEventDescription(event),
+        organizer: event?._embedded?.venues?.[0]?.name || event.name,
         eventDate: new Date(event.dates.start.dateTime),
         latitude: parseFloat(event._embedded.venues[0].location.latitude),
         longitude: parseFloat(event._embedded.venues[0].location.longitude),

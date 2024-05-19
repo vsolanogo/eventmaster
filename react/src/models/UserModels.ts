@@ -45,16 +45,16 @@ export type CreateEventDto = {
   latitude: number;
   longitude: number;
   images: Image[];
-  eventDate: Date;
+  eventDate: Date | null;
 };
 
-export type SerializableCreateEventDto = Omit<CreateEventDto, "eventDate"> & {
-  eventDate: string; // Replaced Date with string for serialization
-};
+// export type SerializableCreateEventDto = Omit<CreateEventDto, "eventDate"> & {
+//   eventDate: string; // Replaced Date with string for serialization
+// };
 
 export type Event = CreateEventDto & {
   id: string;
-  organizer: User;
+  organizer: string;
   createdAt: Date;
   updatedAt: Date;
 };

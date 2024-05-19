@@ -12,11 +12,13 @@ import {
   selectEventsLimit,
   selectEventsPage,
   selectEventsTotalPages,
-  selectEventsDateSort,
   selectTotalCount,
   selectParticipantsError,
   selectPostParticipantStatus,
   selectGetParticipantStatus,
+  selectEventSortBy,
+  selectEventSortOrder,
+  selectInfiniteScroll,
 } from "./selectors";
 import { ApiStatus } from "../../constants";
 import { ErrorMessage, User } from "../../models/UserModels";
@@ -66,17 +68,14 @@ export const useParticipantsError = (): ErrorMessage | null =>
 export const useEventsPostStatus = (): ApiStatus | null =>
   useAppSelector<ApiStatus | null>(selectEventsPostStatus);
 
-export const useEventsLimit = (): ApiStatus | number =>
-  useAppSelector<ApiStatus | number>(selectEventsLimit);
+export const useEventsLimit = (): number =>
+  useAppSelector<number>(selectEventsLimit);
 
 export const useEventsPage = (): number =>
   useAppSelector<number>(selectEventsPage);
 
 export const useEventsTotalPages = (): ApiStatus | number =>
   useAppSelector<ApiStatus | number>(selectEventsTotalPages);
-
-export const useEventsDateSort = (): ApiStatus | SortOrderType =>
-  useAppSelector<ApiStatus | SortOrderType>(selectEventsDateSort);
 
 export const useAllEvents = () =>
   useAppSelector((state) => selectAllEvents(state.events));
@@ -112,3 +111,9 @@ export const useTotalParticipants = () =>
   useAppSelector((state) => selectTotalParticipants(state.participants));
 export const useParticipantsById = (id: string) =>
   useAppSelector((state) => selectParticipantsById(state.participants, id));
+export const useEventSortBy = (): string =>
+  useAppSelector<string>(selectEventSortBy);
+export const useEventSortOrder = (): string =>
+  useAppSelector<string>(selectEventSortOrder);
+export const useInfiniteScroll = (): boolean =>
+  useAppSelector<boolean>(selectInfiniteScroll);

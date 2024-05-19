@@ -15,10 +15,13 @@ export class EventDto {
 
   @Expose()
   @Type(() => UserDto)
-  organizer: UserDto;
+  user: UserDto;
 
   @Expose()
   description: string;
+
+  @Expose()
+  organizer: string;
 
   @Expose()
   latitude: number;

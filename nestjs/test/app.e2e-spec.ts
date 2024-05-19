@@ -106,7 +106,6 @@ describe('App Tests (e2e)', () => {
 
     expect(res.body.id).toBeDefined();
     expect(res.body.email).toBe(userDto.email);
-    expect(res.body.fullName).toBe(userDto.fullName);
 
     expect(res.body.password).toBeUndefined();
   });

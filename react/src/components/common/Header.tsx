@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   useActiveUserIsAdmin,
-  useActiveUserError,
   useIsAuthenticated,
 } from "../../redux/selectors/selectorHooks";
 import { buttonTw } from "../../tailwind/tailwindClassNames";
 import { Link, useRoute, useLocation } from "wouter";
 import { useAppDispatch } from "../../store/store";
 import { logoutUserThunk } from "../../redux/activeUser/activeUserSlice";
-import { Button, Modal, notification, Space } from "antd";
+import { Button, Modal, notification } from "antd";
 import { pop } from "../howler/pop";
 import eventImage from "../../assets/img/event.png";
 
@@ -17,7 +16,6 @@ const buttonHeaderTw = `${buttonTw} mt-0 ml-2 min-w-40 inline-block text-center 
 export const Header = () => {
   const dispatch = useAppDispatch();
   const isAdmin = useActiveUserIsAdmin();
-  const error = useActiveUserError();
   const [api, contextHolder] = notification.useNotification();
   const isAuthenticated = useIsAuthenticated();
   const [matchLogin] = useRoute("/login");
