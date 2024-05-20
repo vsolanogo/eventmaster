@@ -161,6 +161,16 @@ export class EventService {
 
   private async saveEvents(events: any[]) {
     for (const event of events) {
+      const eventDateTime = event.dates.start.dateTime;
+      let parsedDateTime = new Date(eventDateTime);
+
+      if (isNaN(parsedDateTime.getTime())) {
+        this.logger.warn(
+          `Invalid event dateTime: ${eventDateTime} for event ID: ${event.id}. Using current date.`,
+        );
+        parsedDateTime = new Date(); // Fallback to current date
+      }
+
       const attrImages = event._embedded.attractions.map((i) =>
         i.images.reduce((prev, current) =>
           prev.height > current.height ? prev : current,
@@ -178,7 +188,7 @@ export class EventService {
         images: createdImages.map((i) => i.id),
         description: generateEventDescription(event),
         organizer: event?._embedded?.venues?.[0]?.name || event.name,
-        eventDate: new Date(event.dates.start.dateTime),
+        eventDate: parsedDateTime,
         latitude: parseFloat(event._embedded.venues[0].location.latitude),
         longitude: parseFloat(event._embedded.venues[0].location.longitude),
       };

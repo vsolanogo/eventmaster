@@ -1,7 +1,7 @@
 export function generateEventDescription(event) {
   const type = `${event.classifications[0].segment.name} - ${event.classifications[0].genre.name} (${event.classifications[0].subGenre.name})`;
-  const date = event.dates.start.localDate;
-  const time = event.dates.start.localTime;
+  const date = event.dates.start.localDate || 'Unknown Date';
+  const time = event.dates.start.localTime || 'Unknown Time';
   const status = event.dates.status.code;
   const venue = event._embedded.venues[0];
   const venueName = venue.name;
